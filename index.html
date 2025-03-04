@@ -121,6 +121,11 @@
             .day { flex-direction: row; align-items: flex-start; }
             .date { font-size: 16px; }
         }
+		/* Gray out past events */
+		.past-event {
+		    opacity: 0.5; /* Adjust this value if needed */
+		    filter: grayscale(50%);
+		}
     </style>
 </head>
 <body>
@@ -132,94 +137,117 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const events = {
-                1: [
-                    { time: "13:00 - 14:00", title: "Ensaio Coral de Orangevale", location: "Orangevale Church", type: "lunch", description: "", organizer: "Wallivanisson", notes: "" }
-                ],
-                2: [
-                    { time: "09:00 - 16:00", title: "NCC: Multirão Moriah Heights", location: "Moriah Heights", type: "meeting", description: "", organizer: "Wilson Barros", notes: "Leve as ferramentas que puder" }
-                ],
-                7: [
-                    { time: "18:00 - 19:30", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-                ],
-                8: [
-                    { time: "11:00 - 12:00", title: "Dia das Mulheres (Culto Divino)", location: "Orangevale Church", type: "workshop", description: "", organizer: "Departamento da Mulher - Lilian", notes: "" },
-                    { time: "15:30 - 18:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-                ],
-                9: [
-                    { time: "11:00 - 13:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-                ],
-                23: [
-                    { time: "10:00 - 12:00", title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)", location: "Zoológico de Sacramento", type: "trip", description: "visita ao Zoológico de Sacramento", organizer: "Andjela Salazar", notes: "Telefone: 530-903-2716" }
-                ],
-                30: [
-                    { time: "10:00 - 12:00", title: "NCC: Hike para os Jovens e Adolescentes", location: "Pierce Point Rd, Inverness, CA", type: "trip", description: "", organizer: "", notes: "" }
-                ]
-            };
+	    const events = {
+	        1: [
+	            { time: "13:00 - 14:00", title: "Ensaio Coral de Orangevale", location: "Orangevale Church", type: "lunch", description: "", organizer: "Wallivanisson", notes: "" }
+	        ],
+	        2: [
+	            { time: "09:00 - 16:00", title: "NCC: Multirão Moriah Heights", location: "Moriah Heights", type: "meeting", description: "", organizer: "Wilson Barros", notes: "Leve as ferramentas que puder" }
+	        ],
+	        7: [
+	            { time: "18:00 - 19:30", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
+	        ],
+	        8: [
+	            { time: "11:00 - 12:00", title: "Dia das Mulheres (Culto Divino)", location: "Orangevale Church", type: "workshop", description: "", organizer: "Departamento da Mulher - Lilian", notes: "" },
+	            { time: "15:30 - 18:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
+	        ],
+	        9: [
+	            { time: "11:00 - 13:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
+	        ],
+	        23: [
+	            { time: "10:00 - 12:00", title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)", location: "Zoológico de Sacramento", type: "trip", description: "Visita ao Zoológico de Sacramento", organizer: "Andjela Salazar", notes: "Telefone: 530-903-2716" }
+	        ],
+	        30: [
+	            { time: "10:00 - 12:00", title: "NCC: Hike para os Jovens e Adolescentes", location: "Pierce Point Rd, Inverness, CA", type: "trip", description: "", organizer: "", notes: "" }
+	        ]
+	    }
 
-            const eventList = document.getElementById("event-list");
+	    const eventList = document.getElementById("event-list")
 
-            function getWeekday(day) {
-                const date = new Date(2025, 1, day);
-                const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                return weekdays[date.getDay()];
-            }
+	    function getWeekday(day) {
+	        const date = new Date(2025, 2, day) // March (month index is 2)
+	        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+	        return weekdays[date.getDay()]
+	    }
 
-            Object.keys(events).forEach(day => {
-                const formattedDay = day.toString().padStart(2, "0");
-                const weekday = getWeekday(day);
+	    function isPastEvent(eventTime, eventDay) {
+	        const now = new Date()
+	        const currentTime = now.getHours() * 60 + now.getMinutes() // Convert current time to minutes
+	        const currentDay = now.getDate()
 
-                const dayDiv = document.createElement("div");
-                dayDiv.classList.add("day");
+	        const [startHour, startMinute] = eventTime.split(" - ")[0].split(":").map(Number)
+	        const eventMinutes = startHour * 60 + startMinute
 
-                const dateDiv = document.createElement("div");
-                dateDiv.classList.add("date");
-                dateDiv.innerHTML = `${formattedDay} <span class="weekday">${weekday}</span>`;
+	        return eventDay < currentDay || (eventDay === currentDay && eventMinutes < currentTime)
+	    }
 
-                const eventsDiv = document.createElement("div");
-                eventsDiv.classList.add("events");
+	    Object.keys(events).forEach(day => {
+	        const formattedDay = day.toString().padStart(2, "0")
+	        const weekday = getWeekday(day)
 
-                events[day].forEach(event => {
-                    const eventDiv = document.createElement("div");
-                    eventDiv.classList.add("event", event.type);
+	        const dayDiv = document.createElement("div")
+	        dayDiv.classList.add("day")
 
-                    const timeDiv = document.createElement("div");
-                    timeDiv.classList.add("event-time");
-                    timeDiv.textContent = event.time;
+	        const dateDiv = document.createElement("div")
+	        dateDiv.classList.add("date")
+	        dateDiv.innerHTML = `${formattedDay} <span class="weekday">${weekday}</span>`
 
-                    const titleDiv = document.createElement("div");
-                    titleDiv.classList.add("event-title");
-                    titleDiv.textContent = event.title;
+	        const eventsDiv = document.createElement("div")
+	        eventsDiv.classList.add("events")
 
-                    const locationDiv = document.createElement("div");
-                    locationDiv.classList.add("event-location");
-                    locationDiv.textContent = event.location;
+	        events[day].forEach(event => {
+	            const eventDiv = document.createElement("div")
+	            eventDiv.classList.add("event", event.type)
 
-                    const detailsDiv = document.createElement("div");
-                    detailsDiv.classList.add("event-details");
+	            if (isPastEvent(event.time, parseInt(day))) {
+	                eventDiv.classList.add("past-event")
+	            }
 
-                    detailsDiv.innerHTML = `
-                        <p><strong>Description:</strong> ${event.description}</p>
-                        <p><strong>Organizer:</strong> ${event.organizer}</p>
-                        <p><strong>Notes:</strong> ${event.notes}</p>
-                    `;
+	            const timeDiv = document.createElement("div")
+	            timeDiv.classList.add("event-time")
+	            timeDiv.textContent = event.time
 
-                    eventDiv.appendChild(timeDiv);
-                    eventDiv.appendChild(titleDiv);
-                    eventDiv.appendChild(locationDiv);
-                    eventDiv.appendChild(detailsDiv);
-                    eventsDiv.appendChild(eventDiv);
+	            const titleDiv = document.createElement("div")
+	            titleDiv.classList.add("event-title")
+	            titleDiv.textContent = event.title
 
-                    eventDiv.addEventListener("click", () => {
-                        detailsDiv.classList.toggle("open");
-                    });
-                });
+	            const locationDiv = document.createElement("div")
+	            locationDiv.classList.add("event-location")
+	            locationDiv.textContent = event.location
 
-                dayDiv.appendChild(dateDiv);
-                dayDiv.appendChild(eventsDiv);
-                eventList.appendChild(dayDiv);
-            });
-        });
+	            const detailsDiv = document.createElement("div")
+	            detailsDiv.classList.add("event-details")
+	            detailsDiv.innerHTML = `
+	                <p><strong>Description:</strong> ${event.description}</p>
+	                <p><strong>Organizer:</strong> ${event.organizer}</p>
+	                <p><strong>Notes:</strong> ${event.notes}</p>
+	                ${event.location 
+	                    ? `<p><strong>Location:</strong> 
+	                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}" 
+	                           target="_blank" 
+	                           rel="noopener noreferrer">
+	                           ${event.location}
+	                        </a>
+	                       </p>` 
+	                    : ""}
+	            `
+
+	            eventDiv.appendChild(timeDiv)
+	            eventDiv.appendChild(titleDiv)
+	            eventDiv.appendChild(locationDiv)
+	            eventDiv.appendChild(detailsDiv)
+	            eventsDiv.appendChild(eventDiv)
+
+	            eventDiv.addEventListener("click", () => {
+	                detailsDiv.classList.toggle("open")
+	            })
+	        })
+
+	        dayDiv.appendChild(dateDiv)
+	        dayDiv.appendChild(eventsDiv)
+	        eventList.appendChild(dayDiv)
+	    })
+	});
     </script>
 
 </body>
