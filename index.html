@@ -1,254 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Open Graph Meta Tags for WhatsApp & Others -->
-	<meta property="og:title" content="Programação Março 2025" />
-	<meta property="og:description" content="Verifique nossa programação para Março de 2025" />
-	<meta property="og:image" content="https://stock.adobe.com/images/green-leaves-blurred-background-nature-banner-hd/885917111" />
-	<meta property="og:url" content="https://rabriol.github.io/orangevale_newsletter/index.html" />
-	<meta property="og:type" content="website" />
+  <!-- Open Graph Meta Tags for WhatsApp & Others -->
+  <meta property="og:title" content="Programação Março 2025" />
+  <meta property="og:description" content="Verifique nossa programação para Março de 2025" />
+  <meta property="og:image"
+    content="https://stock.adobe.com/images/green-leaves-blurred-background-nature-banner-hd/885917111" />
+  <meta property="og:url" content="https://rabriol.github.io/orangevale_newsletter/index.html" />
+  <meta property="og:type" content="website" />
 
-    <title>Programação de Março 2025</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+  <title>Programação de Março 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-        .calendar {
-            max-width: 400px;
-            width: 100%;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .calendar {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
+    h1 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
 
-        .day {
-            display: flex;
-            align-items: flex-start;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
+    .day {
+      display: flex;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
 
-        .day:last-child {
-            border-bottom: none;
-        }
+    .day:last-child {
+      border-bottom: none;
+    }
 
-        .date {
-            min-width: 80px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
+    .date {
+      min-width: 80px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
 
-        .weekday {
-            display: block;
-            font-size: 12px;
-            font-weight: normal;
-            color: #666;
-        }
+    .weekday {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      color: #666;
+    }
 
-        .events {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+    .events {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-        .event {
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+    .event {
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
 
-        /* Different colors for different event types */
-        .event.lunch { background: #5672f9; }   /* Blue */
-        .event.trip { background: #f2b84b; }   /* Yellow */
-        .event.meeting { background: #4caf50; } /* Green */
-        .event.conference { background: #ff7043; } /* Orange */
-        .event.party { background: #9c27b0; } /* Purple */
-        .event.workshop { background: #009688; } /* Teal */
+    /* Different colors for different event types */
+    .event.lunch {
+      background: #5672f9;
+    }
 
-        /* Event main details (time, title, location) */
-        .event-time { font-size: 12px; opacity: 0.8; }
-        .event-title { font-size: 16px; font-weight: bold; }
-        .event-location { font-size: 14px; opacity: 0.9; }
+    /* Blue */
+    .event.trip {
+      background: #f2b84b;
+    }
 
-        /* Event details (hidden by default) */
-        .event-details {
-            max-height: 0;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
-            margin-top: 5px;
-            padding: 0;
-            color: #333;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
+    /* Yellow */
+    .event.meeting {
+      background: #4caf50;
+    }
 
-        .event-details.open {
-            max-height: 200px;
-            padding: 10px;
-        }
+    /* Green */
+    .event.conference {
+      background: #ff7043;
+    }
 
-        .event-details p {
-            margin: 5px 0;
-            font-size: 12px;
-        }
+    /* Orange */
+    .event.party {
+      background: #9c27b0;
+    }
 
-        @media (max-width: 400px) {
-            .day { flex-direction: row; align-items: flex-start; }
-            .date { font-size: 16px; }
-        }
-		/* Gray out past events */
-		.past-event {
-		    opacity: 0.5; /* Adjust this value if needed */
-		    filter: grayscale(50%);
-		}
-    </style>
+    /* Purple */
+    .event.workshop {
+      background: #009688;
+    }
+
+    /* Teal */
+
+    /* Event main details (time, title, location) */
+    .event-time {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .event-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .event-location {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Event details (hidden by default) */
+    .event-details {
+      max-height: 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      margin-top: 5px;
+      padding: 0;
+      color: #333;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .event-details.open {
+      max-height: 200px;
+      padding: 10px;
+    }
+
+    .event-details p {
+      margin: 5px 0;
+      font-size: 12px;
+    }
+
+    @media (max-width: 400px) {
+      .day {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .date {
+        font-size: 16px;
+      }
+    }
+
+    /* Gray out past events */
+    .past-event {
+      opacity: 0.5;
+      /* Adjust this value if needed */
+      filter: grayscale(50%);
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="calendar">
-        <h1>Programação de Março 2025</h1>
-        <div id="event-list"></div>
-    </div>
+  <div class="calendar">
+    <h1>Programação de Março 2025</h1>
+    <div id="event-list"></div>
+  </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-	    const events = {
-	        1: [
-	            { time: "13:00 - 14:00", title: "Ensaio Coral de Orangevale", location: "Orangevale Church", type: "lunch", description: "", organizer: "Wallivanisson", notes: "" }
-	        ],
-	        2: [
-	            { time: "09:00 - 16:00", title: "NCC: Multirão Moriah Heights", location: "Moriah Heights", type: "meeting", description: "", organizer: "Wilson Barros", notes: "Leve as ferramentas que puder" }
-	        ],
-	        7: [
-	            { time: "18:00 - 19:30", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-	        ],
-	        8: [
-	            { time: "11:00 - 12:00", title: "Dia das Mulheres (Culto Divino)", location: "Orangevale Church", type: "workshop", description: "", organizer: "Departamento da Mulher - Lilian", notes: "" },
-	            { time: "15:30 - 18:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-	        ],
-	        9: [
-	            { time: "11:00 - 13:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
-	        ],
-	        23: [
-	            { time: "10:00 - 12:00", title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)", location: "Zoológico de Sacramento", type: "trip", description: "Visita ao Zoológico de Sacramento", organizer: "Andjela Salazar", notes: "Telefone: 530-903-2716" }
-	        ],
-	        30: [
-	            { time: "10:00 - 12:00", title: "NCC: Hike para os Jovens e Adolescentes", location: "Pierce Point Rd, Inverness, CA", type: "trip", description: "", organizer: "", notes: "" }
-	        ]
-	    }
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const events = {
+        1: [
+          { time: "13:00 - 14:00", title: "Ensaio Coral de Orangevale", location: "Orangevale Church", type: "lunch", description: "", organizer: "Wallivanisson", notes: "" }
+        ],
+        2: [
+          { time: "09:00 - 16:00", title: "NCC: Multirão Moriah Heights", location: "Moriah Heights", type: "meeting", description: "", organizer: "Wilson Barros", notes: "Leve as ferramentas que puder" }
+        ],
+        7: [
+          { time: "18:00 - 19:30", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
+        ],
+        8: [
+          { time: "11:00 - 12:00", title: "Dia das Mulheres (Culto Divino)", location: "Orangevale Church", type: "workshop", description: "", organizer: "Departamento da Mulher - Lilian", notes: "" },
+          {
+            time: "15:30 - 21:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "Pregador: Daniel Balbach", organizer: "NCC", notes: `
+<p><strong>11:00 AM</strong> - “Um Chamado Pessoal para Trabalhar com Jesus: O Ciclo do Evangelismo”</p>
+<p><strong>3:30 PM</strong> - “Prepare o Solo: Workshop Interativo em Grupo”</p>
+<p><strong>5:00 PM</strong> - Lanche da Tarde</p>
+<p><strong>6:00 PM</strong> - “O Segredo! Tornando o Complicado Simples”</p>
+<p><strong>8:00 PM</strong> - Atividades Jovens à Noite</p>
+` }
+        ],
+        9: [
+          { time: "11:00 - 13:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "" }
+        ],
+        23: [
+          { time: "10:00 - 12:00", title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)", location: "Zoológico de Sacramento", type: "trip", description: "Visita ao Zoológico de Sacramento", organizer: "Andjela Salazar", notes: "Telefone: 530-903-2716" }
+        ],
+        29: [
+          { time: "09:30 - 12:00", title: "Orangevale Church fechada", location: "", type: "party", description: "", organizer: "", notes: "" },
+          {
+            time: "11:00 - 15:00", title: "Marysville SDARM Church: Senhor, Até Quando?", location: "800 D St, Marysville, CA 95901", type: "trip", description: "", organizer: "", notes: `
+<p><strong>11:00 AM</strong> - “Perseguição e Vitória” apresentado por Darvin Lopez</p>
+<p><strong>2:00 PM</strong> - “Senhor, Até Quando?” apresentado por Ebert Fountain (a confirmar)</p>
+          ` }
 
-	    const eventList = document.getElementById("event-list")
+        ],
+        30: [
+          { time: "10:00 - 12:00", title: "NCC: Hike para os Jovens e Adolescentes", location: "Pierce Point Rd, Inverness, CA", type: "trip", description: "", organizer: "", notes: "" }
+        ]
+      }
 
-	    function getWeekday(day) {
-	        const date = new Date(2025, 2, day) // March (month index is 2)
-	        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-	        return weekdays[date.getDay()]
-	    }
+      const eventList = document.getElementById("event-list")
 
-	    function isPastEvent(eventTime, eventDay) {
-	        const now = new Date()
-	        const currentTime = now.getHours() * 60 + now.getMinutes() // Convert current time to minutes
-	        const currentDay = now.getDate()
+      function getWeekday(day) {
+        const date = new Date(2025, 2, day) // March (month index is 2)
+        const weekdays = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
+        return weekdays[date.getDay()]
+      }
 
-	        const [startHour, startMinute] = eventTime.split(" - ")[0].split(":").map(Number)
-	        const eventMinutes = startHour * 60 + startMinute
+      function isPastEvent(eventTime, eventDay) {
+        const now = new Date()
+        const currentTime = now.getHours() * 60 + now.getMinutes() // Convert current time to minutes
+        const currentDay = now.getDate()
 
-	        return eventDay < currentDay || (eventDay === currentDay && eventMinutes < currentTime)
-	    }
+        const [startHour, startMinute] = eventTime.split(" - ")[0].split(":").map(Number)
+        const eventMinutes = startHour * 60 + startMinute
 
-	    Object.keys(events).forEach(day => {
-	        const formattedDay = day.toString().padStart(2, "0")
-	        const weekday = getWeekday(day)
+        return eventDay < currentDay || (eventDay === currentDay && eventMinutes < currentTime)
+      }
 
-	        const dayDiv = document.createElement("div")
-	        dayDiv.classList.add("day")
+      Object.keys(events).forEach(day => {
+        const formattedDay = day.toString().padStart(2, "0")
+        const weekday = getWeekday(day)
 
-	        const dateDiv = document.createElement("div")
-	        dateDiv.classList.add("date")
-	        dateDiv.innerHTML = `${formattedDay} <span class="weekday">${weekday}</span>`
+        const dayDiv = document.createElement("div")
+        dayDiv.classList.add("day")
 
-	        const eventsDiv = document.createElement("div")
-	        eventsDiv.classList.add("events")
+        const dateDiv = document.createElement("div")
+        dateDiv.classList.add("date")
+        dateDiv.innerHTML = `${formattedDay} <span class="weekday">${weekday}</span>`
 
-	        events[day].forEach(event => {
-	            const eventDiv = document.createElement("div")
-	            eventDiv.classList.add("event", event.type)
+        const eventsDiv = document.createElement("div")
+        eventsDiv.classList.add("events")
 
-	            if (isPastEvent(event.time, parseInt(day))) {
-	                eventDiv.classList.add("past-event")
-	            }
+        events[day].forEach(event => {
+          const eventDiv = document.createElement("div")
+          eventDiv.classList.add("event", event.type)
 
-	            const timeDiv = document.createElement("div")
-	            timeDiv.classList.add("event-time")
-	            timeDiv.textContent = event.time
+          if (isPastEvent(event.time, parseInt(day))) {
+            eventDiv.classList.add("past-event")
+          }
 
-	            const titleDiv = document.createElement("div")
-	            titleDiv.classList.add("event-title")
-	            titleDiv.textContent = event.title
+          const timeDiv = document.createElement("div")
+          timeDiv.classList.add("event-time")
+          timeDiv.textContent = event.time
 
-	            const locationDiv = document.createElement("div")
-	            locationDiv.classList.add("event-location")
-	            locationDiv.textContent = event.location
+          const titleDiv = document.createElement("div")
+          titleDiv.classList.add("event-title")
+          titleDiv.textContent = event.title
 
-	            const detailsDiv = document.createElement("div")
-	            detailsDiv.classList.add("event-details")
-	            detailsDiv.innerHTML = `
-	                <p><strong>Description:</strong> ${event.description}</p>
-	                <p><strong>Organizer:</strong> ${event.organizer}</p>
-	                <p><strong>Notes:</strong> ${event.notes}</p>
-	                ${event.location 
-	                    ? `<p><strong>Location:</strong> 
+          const locationDiv = document.createElement("div")
+          locationDiv.classList.add("event-location")
+          locationDiv.textContent = event.location
+
+          const detailsDiv = document.createElement("div")
+          detailsDiv.classList.add("event-details")
+          detailsDiv.innerHTML = `
+	                <p><strong>Organizador:</strong> ${event.organizer}</p>
+	                <p><strong>Descrição:</strong> ${event.description}</p>
+	                ${event.location
+              ? `<p><strong>Local:</strong> 
 	                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}" 
 	                           target="_blank" 
 	                           rel="noopener noreferrer">
 	                           ${event.location}
 	                        </a>
-	                       </p>` 
-	                    : ""}
+	                       </p>`
+              : ""}
+                  <p><strong>Nota:</strong> ${event.notes}</p>
 	            `
 
-	            eventDiv.appendChild(timeDiv)
-	            eventDiv.appendChild(titleDiv)
-	            eventDiv.appendChild(locationDiv)
-	            eventDiv.appendChild(detailsDiv)
-	            eventsDiv.appendChild(eventDiv)
+          eventDiv.appendChild(timeDiv)
+          eventDiv.appendChild(titleDiv)
+          eventDiv.appendChild(locationDiv)
+          eventDiv.appendChild(detailsDiv)
+          eventsDiv.appendChild(eventDiv)
 
-	            eventDiv.addEventListener("click", () => {
-	                detailsDiv.classList.toggle("open")
-	            })
-	        })
+          eventDiv.addEventListener("click", () => {
+            detailsDiv.classList.toggle("open")
+          })
+        })
 
-	        dayDiv.appendChild(dateDiv)
-	        dayDiv.appendChild(eventsDiv)
-	        eventList.appendChild(dayDiv)
-	    })
-	});
-    </script>
+        dayDiv.appendChild(dateDiv)
+        dayDiv.appendChild(eventsDiv)
+        eventList.appendChild(dayDiv)
+      })
+    });
+  </script>
 
 </body>
+
 </html>
