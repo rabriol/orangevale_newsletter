@@ -187,7 +187,7 @@
     }
 
     .event-details.open {
-      max-height: 250px;
+      max-height: 500px;
       padding: 10px;
     }
 
@@ -238,6 +238,14 @@
       border-radius: 5px;
       text-transform: uppercase;
     }
+
+    .event-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
@@ -261,54 +269,190 @@
     document.addEventListener("DOMContentLoaded", () => {
       const events = {
         1: [
-          { time: "13:00 - 14:00", title: "Ensaio Coral de Orangevale", location: "Orangevale Church", type: "lunch", description: "", organizer: "Wallivanisson", notes: "", postponed: false, phone: "" }
+          {
+            time: "13:00 - 14:00",
+            title: "Ensaio Coral de Orangevale",
+            location: "Orangevale Church",
+            type: "lunch",
+            description: "",
+            organizer: "Wallivanisson",
+            notes: "",
+            postponed: false,
+            phone: ""
+          }
         ],
         2: [
-          { time: "09:00 - 16:00", title: "NCC: Multirão Moriah Heights", location: "Moriah Heights", type: "meeting", description: "", organizer: "Wilson Barros", notes: "Leve as ferramentas que puder", postponed: false, phone: "" }
+          {
+            time: "09:00 - 16:00",
+            title: "NCC: Multirão Moriah Heights",
+            location: "Moriah Heights",
+            type: "meeting",
+            description: "",
+            organizer: "Wilson Barros",
+            notes: "Leve as ferramentas que puder",
+            postponed: false,
+            phone: ""
+          }
         ],
         7: [
-          { time: "18:00 - 19:30", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "", postponed: false, phone: "" }
+          {
+            time: "18:00 - 19:30",
+            title: "NCC - Seminário Evangelista",
+            location: "Moriah Heights",
+            type: "conference",
+            description: "",
+            organizer: "NCC",
+            notes: "",
+            postponed: false,
+            phone: ""
+          }
         ],
         8: [
-          { time: "11:00 - 12:00", title: "Dia das Mulheres (Culto Divino)", location: "Orangevale Church", type: "workshop", description: "", organizer: "Departamento da Mulher - Lilian", notes: "", postponed: false, phone: "" },
           {
-            time: "15:30 - 21:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "Pregador: Daniel Balbach", organizer: "NCC", notes: `
-            <p><strong>11:00 AM</strong> - “Um Chamado Pessoal para Trabalhar com Jesus: O Ciclo do Evangelismo”</p>
-            <p><strong>3:30 PM</strong> - “Prepare o Solo: Workshop Interativo em Grupo”</p>
-            <p><strong>5:00 PM</strong> - Lanche da Tarde</p>
-            <p><strong>6:00 PM</strong> - “O Segredo! Tornando o Complicado Simples”</p>
-            <p><strong>8:00 PM</strong> - Atividades Jovens à Noite</p>
-            `, postponed: false, phone: ""
+            time: "11:00 - 12:00",
+            title: "Dia das Mulheres (Culto Divino)",
+            location: "Orangevale Church",
+            type: "workshop",
+            description: "",
+            organizer: "Departamento da Mulher - Lilian",
+            notes: "",
+            postponed: false,
+            phone: ""
+          },
+          {
+            time: "15:30 - 21:00",
+            title: "NCC - Seminário Evangelista",
+            location: "Moriah Heights",
+            type: "conference",
+            description: "Pregador: Daniel Balbach",
+            organizer: "NCC",
+            notes: `
+                <p><strong>11:00 AM</strong> - “Um Chamado Pessoal para Trabalhar com Jesus: O Ciclo do Evangelismo”</p>
+                <p><strong>3:30 PM</strong> - “Prepare o Solo: Workshop Interativo em Grupo”</p>
+                <p><strong>5:00 PM</strong> - Lanche da Tarde</p>
+                <p><strong>6:00 PM</strong> - “O Segredo! Tornando o Complicado Simples”</p>
+                <p><strong>8:00 PM</strong> - Atividades Jovens à Noite</p>
+              `,
+            postponed: false,
+            phone: ""
           }
         ],
         9: [
-          { time: "11:00 - 13:00", title: "NCC - Seminário Evangelista", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "", postponed: false, phone: "" }
+          {
+            time: "11:00 - 13:00",
+            title: "NCC - Seminário Evangelista",
+            location: "Moriah Heights",
+            type: "conference",
+            description: "",
+            organizer: "NCC",
+            notes: "",
+            postponed: false,
+            phone: ""
+          }
         ],
         15: [
           {
-            time: "11:00 - 11:30", title: "Orangevale - Oferta de 3° Sábado", location: "6800 Main Ave. Orangevale, CA 95662", type: "lunch", description: `<a href="https://sdarm1844.churchtrac.com/">Oferte Aqui</a><br><br>Nossa oferta de gratidão é destinada aos
-projetos sociais de nossa família Orangevale<br><br>`, organizer: "Orangevale Church", notes: "", postponed: false, phone: ""
+            time: "11:00 - 11:30",
+            title: "Orangevale - Oferta de 3° Sábado",
+            location: "6800 Main Ave. Orangevale, CA 95662",
+            type: "lunch",
+            description: `<a href="https://sdarm1844.churchtrac.com/">Oferte Aqui</a><br><br>Nossa oferta de gratidão é destinada aos projetos sociais de nossa família Orangevale<br><br>`,
+            organizer: "Orangevale Church",
+            notes: "",
+            postponed: false,
+            phone: ""
           },
-          { time: "13:00 - 14:00", title: "Orangevale - Ensaio Coral", location: "6800 Main Ave. Orangevale, CA 95662", type: "conference", description: "", organizer: "Orangevale Church", notes: "", postponed: false, phone: "" },
-          { time: "16:30 - 17:30", title: "NCC - Ensaio Coral", location: "Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "", postponed: false, phone: "" },
-          { time: "17:30 - 18:30", title: "NCC - Ensaio Orquestra e Coral juntos", location: "Auditório Moriah Heights", type: "conference", description: "", organizer: "NCC", notes: "", postponed: false, phone: "" }
+          {
+            time: "13:00 - 14:00",
+            title: "Orangevale - Ensaio Coral",
+            location: "6800 Main Ave. Orangevale, CA 95662",
+            type: "conference",
+            description: "",
+            organizer: "Orangevale Church",
+            notes: "",
+            postponed: false,
+            phone: ""
+          },
+          {
+            time: "16:30 - 17:30",
+            title: "NCC - Ensaio Coral",
+            location: "Moriah Heights",
+            type: "conference",
+            description: "",
+            organizer: "NCC",
+            notes: "",
+            postponed: false,
+            phone: ""
+          },
+          {
+            time: "17:30 - 18:30",
+            title: "NCC - Ensaio Orquestra e Coral juntos",
+            location: "Auditório Moriah Heights",
+            type: "conference",
+            description: "",
+            organizer: "NCC",
+            notes: "",
+            postponed: false,
+            phone: ""
+          }
         ],
         23: [
-          { time: "10:00 - 12:00", title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)", location: "Zoológico de Sacramento", type: "trip", description: "Visita ao Zoológico de Sacramento", organizer: "Andjela Salazar", notes: "", postponed: true, cause: "ALTERADO 18 DE MAIO", phone: "530-903-2716" }
+          {
+            time: "10:00 - 12:00",
+            title: "NCC: Todos a Bordo da Arca (Zoo Sacramento)",
+            location: "Zoológico de Sacramento",
+            type: "trip",
+            description: "Visita ao Zoológico de Sacramento",
+            organizer: "Andjela Salazar",
+            notes: "",
+            postponed: true,
+            cause: "ALTERADO 18 DE MAIO",
+            phone: "530-903-2716",
+            image: "https://ci3.googleusercontent.com/meips/ADKq_NYp5utuOhZPwmWlJ51xv3JaUexsX-okaP60v8I_uatRaFkwMo0hXwIiq8VXT8XrQcRVsyCESJTPB6jq9sHC1WAPovqJS24ujmWkFULUOdbXNLxJr44sxu52fLeigM2pSiZqfmB4tOk2rPhc6BmvtJYrWM8UNkbhoQs=s0-d-e1-ft#https://mcusercontent.com/ce6f0a192c7c0785d67ce243e/images/f0e98eec-a525-c3be-77ed-e3f53dcc3d60.png"
+          }
         ],
         29: [
-          { time: "09:30 - 12:00", title: "Orangevale Church fechada", location: "", type: "party", description: "", organizer: "Orangevale Church", notes: "", postponed: false, phone: "" },
           {
-            time: "11:00 - 15:00", title: "Marysville SDARM Church: Senhor, Até Quando?", location: "800 D St, Marysville, CA 95901", type: "trip", description: "", organizer: "Marysville Church", notes: `
-            <p><strong>11:00 AM</strong> - “Perseguição e Vitória” - por Darvin Lopez</p>
-            <p><strong>2:00 PM</strong> - “Senhor, Até Quando?” - por Ebert Fountain (a confirmar)</p>
-
-            <p><br><i>Almoço será fornecido no Sábado</i></p>
-          `, postponed: false, phone: ""
+            time: "09:30 - 12:00",
+            title: "Orangevale Church fechada",
+            location: "",
+            type: "party",
+            description: "",
+            organizer: "Orangevale Church",
+            notes: "",
+            postponed: false,
+            phone: ""
+          },
+          {
+            time: "11:00 - 15:00",
+            title: "Marysville SDARM Church: Senhor, Até Quando?",
+            location: "800 D St, Marysville, CA 95901",
+            type: "trip",
+            description: "",
+            organizer: "Marysville Church",
+            notes: `
+                <p><strong>11:00 AM</strong> - “Perseguição e Vitória” - por Darvin Lopez</p>
+                <p><strong>2:00 PM</strong> - “Senhor, Até Quando?” - por Ebert Fountain (a confirmar)</p>
+                <p><br><i>Almoço será fornecido no Sábado</i></p>
+              `,
+            postponed: false,
+            phone: "",
+            image: "https://ci3.googleusercontent.com/meips/ADKq_NaElSa9zygwxw1oOa0EdJBwO-mJ0HETyAqGst49079uXr9f5rlDKSvjwVtPRZnI7Ecio2R3cGpQtdxnffxX2UmwoXrOCT7UO1MLhY5lkQWqRfIQFnapFQRMHSxRa6CwGUoQVwvsLIusCQP9Jy72nDykgPwdpG7XLLM=s0-d-e1-ft#https://mcusercontent.com/ce6f0a192c7c0785d67ce243e/images/dccd478b-6520-b798-9cbc-ab87226b83f6.jpg"
           }
         ],
         30: [
-          { time: "10:00 - 12:00", title: "NCC: Trilha para os Jovens e Adolescentes", location: "Pierce Point Rd, Inverness, CA", type: "trip", description: "", organizer: "NCC", notes: "", postponed: false, phone: "" }
+          {
+            time: "10:00 - 12:00",
+            title: "NCC: Trilha para os Jovens e Adolescentes",
+            location: "Pierce Point Rd, Inverness, CA",
+            type: "trip",
+            description: "",
+            organizer: "NCC",
+            notes: "",
+            postponed: false,
+            phone: "",
+            image: "https://ci3.googleusercontent.com/meips/ADKq_NZqy2klprAYu3XgU2HaIUVieEyLhL_n-qMy88jGNhgFQApsxfXAVbb5bGzZYtma6SOU7SF3UHOwTcwqlnwyvaebvHASYssVsxgTjnn8RqEGn160e7ccwoIf1Nu55FO7GUWry5OpQ1cYQXsD5dAZucn7Wb-me2nXdnI=s0-d-e1-ft#https://mcusercontent.com/ce6f0a192c7c0785d67ce243e/images/20601dc1-4d35-7146-5520-716c49e314e9.png"
+          }
         ]
       }
 
@@ -367,6 +511,14 @@ projetos sociais de nossa família Orangevale<br><br>`, organizer: "Orangevale C
 
           const detailsDiv = document.createElement("div")
           detailsDiv.classList.add("event-details")
+
+          if (event.image) {
+            const eventImg = document.createElement("img")
+            eventImg.src = event.image
+            eventImg.alt = event.title
+            eventImg.classList.add("event-image")
+            detailsDiv.appendChild(eventImg)
+          }
 
           if (event.organizer) {
             detailsDiv.innerHTML += `<p><strong>Organizador:</strong> ${event.organizer}</p>`
